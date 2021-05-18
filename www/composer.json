@@ -1,0 +1,19 @@
+{
+    "name": "ricfio/sales-taxes-kata",
+    "description": "Sales Taxes Problem (Kata)",
+    "autoload": {
+        "psr-4": {
+            "App\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\" : "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^4.7",
+        "phpstan/phpstan": "^0.12.87"
+    }
+}

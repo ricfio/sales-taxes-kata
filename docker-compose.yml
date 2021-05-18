@@ -1,0 +1,37 @@
+services:
+
+  nginx:
+    image: nginx:${NGINX_VERSION:-1.19}-alpine
+    depends_on:
+      - php-fpm
+    environment:
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/conf.d
+      - NGINX_ENVSUBST_TEMPLATE_DIR=/etc/nginx/templates
+      - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.template
+      - NGINX_HOST=${NGINX_HOST:-localhost}
+      - NGINX_ROOT=${NGINX_ROOT:-/var/www}
+    hostname: ${APP_NAME}_nginx
+    ports:
+      - "${NGINX_PORT_HTTP:-80}:80"
+      - "${NGINX_PORT_HTTPS:-443}:443"
+    volumes:
+      - ./log:/var/log
+      - ./www:/var/www
+      - ./docker/nginx/templates:/etc/nginx/templates
+
+  php-fpm:
+    build:
+      context: ./docker/php
+      args:
+        - PHP_VERSION=${PHP_VERSION:-7.4.16}
+        - PHP_SYSTEM_TZ=${PHP_SYSTEM_TZ:-Europe/London}
+        - XDEBUG_MODE=${XDEBUG_MODE:-off}
+        - XDEBUG_CLIENT_PORT=${XDEBUG_CLIENT_PORT:-9003}
+        - XDEBUG_CLIENT_HOST=${XDEBUG_CLIENT_HOST:-localhost}
+    hostname: ${APP_NAME}
+    ports:
+      - "${PHP_PORT:-9000}:9000"
+      - "${XDEBUG_CLIENT_PORT:-9003}:9003"
+    volumes:
+      - ./log:/var/log
+      - ./www:/var/www

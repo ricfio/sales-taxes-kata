@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+        colors="true"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        stopOnRisky="true"
+        verbose="true">
+  <testsuites>
+    <testsuite name="ValueObject">
+      <file>tests/ValueObject/CategoryTest.php</file>
+    </testsuite>
+    <testsuite name="Entity">
+      <file>tests/Entity/ProductTest.php</file>
+      <file>tests/Entity/ShoppingItemTest.php</file>
+      <file>tests/Entity/ShoppingBasketTest.php</file>
+      <file>tests/Entity/SalesItemTest.php</file>
+      <file>tests/Entity/SalesReceiptTest.php</file>
+    </testsuite>
+    <testsuite name="Service">
+      <file>tests/Service/RoundingUp005Test.php</file>
+    </testsuite>
+    <testsuite name="Application">
+      <file>tests/ApplicationTest.php</file>
+    </testsuite>
+  </testsuites>
+</phpunit>
